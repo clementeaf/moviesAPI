@@ -1,0 +1,22 @@
+type Movie {
+  id: ID!
+  title: String!
+  description: String!
+  genre: String!
+  year: Int!
+  productionCompany: String!
+  actors: [Actor!]!
+}
+
+type Actor {
+  id: ID!
+  name: String!
+  movies: [String!]!
+}
+
+type Query {
+  movies: [Movie!]!
+  movie(id: ID!): Movie
+  actors: [Actor!]!
+  actor(id: ID!): Actor
+}

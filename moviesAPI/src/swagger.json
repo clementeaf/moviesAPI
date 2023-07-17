@@ -1,0 +1,95 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API REST con GraphQL",
+    "description": "API para...",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/graphql": {
+      "post": {
+        "tags": ["GraphQL"],
+        "summary": "Endpoint para ejecutar consultas y mutaciones GraphQL",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GraphQLRequestBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GraphQLResponseBody"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GraphQLRequestBody": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "variables": {
+            "type": "object"
+          }
+        },
+        "required": ["query"]
+      },
+      "GraphQLResponseBody": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GraphQLError"
+            }
+          }
+        }
+      },
+      "GraphQLError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "line": {
+                  "type": "integer"
+                },
+                "column": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "path": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
